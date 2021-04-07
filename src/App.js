@@ -2,16 +2,13 @@ import React, { useEffect, useState } from "react";
 import DeckGL, { GeoJsonLayer } from "deck.gl";
 import 'antd/dist/antd.css';
 import Checkbox from 'antd/lib/checkbox';
+import Button from 'antd/lib/button';
+import Modal from 'antd/lib/modal';
 import './App.css';
 import mapboxgl from 'mapbox-gl';
 import { StaticMap } from "react-map-gl";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useQueryParam, StringParam } from 'use-query-params';
-
-
-// @ts-ignore
-// eslint-disable-next-line import/no-webpack-loader-syntax
-mapboxgl.workerClass = require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
 
 const MAPBOX_ACCESS_TOKEN =
   "pk.eyJ1IjoiaGFsYXphciIsImEiOiJja2N0dXI2Y3kxbTBoMnBxcTJnaTl3czVxIn0.MXzwZHuwNaOPKZgO17_YmA";
@@ -39,7 +36,7 @@ function App({ data }) {
   const [serial, setSerial] = useState(0);
   const [crossStreets, setCrossStreets] = useState(0);
   const [routeParam, setRouteParam] = useQueryParam('r', StringParam);
-
+  const [modalVisible, setModalVisible] = useState(false);
 
   
   const toggleStreet = (streetName) => {
@@ -53,7 +50,12 @@ function App({ data }) {
     setRouteParam(Array.from(routeSet).join(','));
   }
 
-
+  const showModal = () => {
+    setModalVisible(true);
+  }
+  const hideModal = () => {
+    setModalVisible(false);
+  }
 
   useEffect(() => {
     const routeSet = getRouteSet(routeParam);
@@ -76,9 +78,16 @@ function App({ data }) {
           <div style={{ paddingTop: "15px" }}>
             <Checkbox checked={satellite}
               onChange={e => setSatellite(e.target.checked)}>Satellite</Checkbox>
+            <Button style={{ marginLeft: "15px"}} onClick={showModal}>Show streets</Button>
           </div>
         </div>
       </div>
+
+      <Modal footer={null} title="Streets" visible={modalVisible} onCancel={hideModal}>
+        <div className="street-list">
+        {Array.from(getRouteSet(routeParam)).sort().map(streetName => <div key={streetName}>{streetName}</div>)}
+        </div>
+      </Modal>
       <div style={{ width: 0, height: 0 }} >
         <DeckGL
           initialViewState={initialViewState}
