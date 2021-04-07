@@ -1,0 +1,21 @@
+.controls {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  z-index: 10;
+  position: absolute;
+  background: rgb(255,255,255,0.95);
+
+}
+.controls h1 {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+.controls label {
+  padding-right-x: 10px; 
+  padding-top-x: 10px; 
+}
+
+
+.App {
+}
