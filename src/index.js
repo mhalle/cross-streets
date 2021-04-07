@@ -3,13 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import data from "./newton-routes-nodes2.json";
-
+import {
+  BrowserRouter as Router,
+  Route
+} from "react-router-dom";
+import { QueryParamProvider } from 'use-query-params';
 import reportWebVitals from './reportWebVitals';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App data={data} />
+    <Router>
+      <QueryParamProvider ReactRouterRoute={Route}>
+        <App data={data} />
+      </QueryParamProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,5 +1,5 @@
 {
-  "name": "icountapp",
+  "name": "cross-streets",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,12 +8,17 @@
     "@testing-library/user-event": "^12.8.3",
     "antd": "^4.15.0",
     "deck.gl": "^8.4.12",
-    "mapbox-gl": "^2.2.0",
+    "history": "^5.0.0",
+    "mapbox-gl": "^1.13.1",
+    "query-string": "^6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-map-gl": "^6.1.11",
+    "react-map-gl": "5.3.4",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.1.1"
+    "use-query-params": "^1.2.2",
+    "web-vitals": "^1.1.1",
+    "worker-loader": "^3.0.8"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -31,7 +36,10 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "not ie 11",
+      "not chrome < 51",
+      "not safari < 10"
     ],
     "development": [
       "last 1 chrome version",
