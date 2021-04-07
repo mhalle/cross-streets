@@ -16,6 +16,14 @@ mapboxgl.workerClass = require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worke
 const MAPBOX_ACCESS_TOKEN =
   "pk.eyJ1IjoiaGFsYXphciIsImEiOiJja2N0dXI2Y3kxbTBoMnBxcTJnaTl3czVxIn0.MXzwZHuwNaOPKZgO17_YmA";
 
+
+function getRouteSet(rp) {
+  if(!rp) {
+    return new Set();
+  }
+  return new Set(rp.split(','));
+}
+
 function App({ data }) {
   const initialViewState = {
     longitude: -71.2192,
@@ -32,8 +40,10 @@ function App({ data }) {
   const [crossStreets, setCrossStreets] = useState(0);
   const [routeParam, setRouteParam] = useQueryParam('r', StringParam);
 
+
+  
   const toggleStreet = (streetName) => {
-    const routeSet = new Set(routeParam.split(','));
+    const routeSet = getRouteSet(routeParam);
     if (routeSet.has(streetName)) {
       routeSet.delete(streetName);
     }
@@ -46,7 +56,7 @@ function App({ data }) {
 
 
   useEffect(() => {
-    const routeSet = new Set(routeParam.split(','));
+    const routeSet = getRouteSet(routeParam);
     for (let s of Object.keys(data.streetIndex)) {
       const state = routeSet.has(s);
       for (let e of data.streetIndex[s]) {
