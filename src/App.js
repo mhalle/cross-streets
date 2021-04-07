@@ -74,6 +74,7 @@ function App({ data }) {
     <div className="App">
       <div className="controls">
         <h1>{crossStreets} Cross Streets</h1>
+        <div style={{ lineHeight: '1.15em'}}>Click streets to add or remove <br/>them from the list.</div>
         <div>
           <div style={{ paddingTop: "15px" }}>
             <Checkbox checked={satellite}
