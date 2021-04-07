@@ -175,9 +175,9 @@ function getLayers(data, serial, toggleStreet) {
     getLineColor: [0, 0, 0, 255],
     radiusUnits: 'meters',
     getRadius: 10,
-    getLineWidth: 0,
+    getLineWidth: 1,
     getFillColor: (d) => {
-      return d.properties.picked ? [0, 0, 0, 255] : [0, 0, 180, 100]
+      return d.properties.picked ? [0, 0, 0, 255] : [50, 50, 50, 100]
     },
     data: Object.values(data.nodes),
   });
