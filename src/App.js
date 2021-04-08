@@ -56,6 +56,9 @@ function App({ data }) {
   const hideModal = () => {
     setModalVisible(false);
   }
+  const clearRoutes = () => {
+    setRouteParam('');
+  }
 
   useEffect(() => {
     const routeSet = getRouteSet(routeParam);
@@ -77,9 +80,9 @@ function App({ data }) {
         <div style={{ lineHeight: '1.15em'}}>Click streets to add or remove <br/>them from the list.</div>
         <div>
           <div style={{ paddingTop: "15px" }}>
-            <Checkbox checked={satellite}
-              onChange={e => setSatellite(e.target.checked)}>Satellite</Checkbox>
-            <Button style={{ marginLeft: "15px"}} onClick={showModal}>Show streets</Button>
+            <Button key="show"  onClick={showModal}>Show streets</Button>
+            <Button key="clear" style={{ marginLeft: "15px"}} onClick={clearRoutes}>Clear</Button>
+
           </div>
         </div>
       </div>
